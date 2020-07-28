@@ -9,6 +9,9 @@ import '../screens/sports_screen.dart';
 import '../screens/technology_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
+  TabController tabCotroller;
+  CustomDrawer(this.tabCotroller);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -31,30 +34,51 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             title: Text('Business'),
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => BusinessScreen(),
-                ),
-              );
+              Navigator.pop(context);
+              tabCotroller.animateTo(0);
             },
           ),
           ListTile(
             title: Text('Entertainment'),
+            onTap: () {
+              Navigator.pop(context);
+              tabCotroller.animateTo(1);
+            },
           ),
           ListTile(
             title: Text('General'),
+            onTap: () {
+              Navigator.of(context).pop();
+              tabCotroller.animateTo(2);
+            },
           ),
           ListTile(
             title: Text('Health'),
+            onTap: () {
+              Navigator.pop(context);
+              tabCotroller.animateTo(3);
+            },
           ),
           ListTile(
             title: Text('Science'),
+            onTap: () {
+              Navigator.of(context).pop();
+              tabCotroller.animateTo(4);
+            },
           ),
           ListTile(
             title: Text('Sports'),
+            onTap: () {
+              Navigator.pop(context);
+              tabCotroller.animateTo(5);
+            },
           ),
           ListTile(
             title: Text('Technology'),
+            onTap: () {
+              Navigator.pop(context);
+              tabCotroller.animateTo(6);
+            },
           ),
         ],
       ),

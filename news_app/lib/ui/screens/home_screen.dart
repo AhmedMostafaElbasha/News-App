@@ -9,8 +9,24 @@ import 'package:newsapp/ui/screens/technology_screen.dart';
 
 import '../widgets/custom_drawer.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static String routeName = '/home_screen';
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  TabController tabCotroller;
+
+  @override
+  void initState() {
+    tabCotroller = TabController(initialIndex: 0, length: 7, vsync: this);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -21,6 +37,7 @@ class HomeScreen extends StatelessWidget {
           title: Text('NEWS'),
           centerTitle: true,
           bottom: TabBar(
+            controller: tabCotroller,
             tabs: [
               Tab(
                 text: 'Business',
@@ -61,8 +78,9 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
-        drawer: CustomDrawer(),
+        drawer: CustomDrawer(tabCotroller),
         body: TabBarView(
+          controller: tabCotroller,
           children: [
             BusinessScreen(),
             EntertainmentScreen(),
