@@ -10,6 +10,7 @@
         android:label="newsapp"
         android:icon="@mipmap/ic_launcher">
         <activity
+        <uses-permission android:name="android.permission.INTERNET" />
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
