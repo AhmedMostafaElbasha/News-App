@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/data/news_provider.dart';
+import 'package:newsapp/ui/widgets/empty_state.dart';
 import 'package:provider/provider.dart';
 
 import './news_item.dart';
@@ -22,16 +23,18 @@ class NewsList extends StatelessWidget {
     var newsData = Provider.of<NewsProvider>(context);
     var newsItems = newsData.newsItems;
 
-    return Container(
-      margin: EdgeInsets.all(width * 0.01),
-      child: ListView.builder(
-        itemCount: newsItems.length,
-        itemBuilder: (context, index) {
-          return NewsItem(
-            news: newsItems[index],
+    return newsItems.length == 0
+        ? EmptyState()
+        : Container(
+            margin: EdgeInsets.all(width * 0.01),
+            child: ListView.builder(
+              itemCount: newsItems.length,
+              itemBuilder: (context, index) {
+                return NewsItem(
+                  news: newsItems[index],
+                );
+              },
+            ),
           );
-        },
-      ),
-    );
   }
 }
