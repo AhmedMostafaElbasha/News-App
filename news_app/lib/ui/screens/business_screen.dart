@@ -1,25 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:newsapp/ui/widgets/news_item.dart';
+import 'package:newsapp/data/news_provider.dart';
+import 'package:newsapp/ui/widgets/loading_state.dart';
+import 'package:newsapp/ui/widgets/news_list.dart';
+import 'package:provider/provider.dart';
 
-class BusinessScreen extends StatelessWidget {
+class BusinessScreen extends StatefulWidget {
   static String routeName = '/business_screen';
+
+  @override
+  _BusinessScreenState createState() => _BusinessScreenState();
+}
+
+class _BusinessScreenState extends State<BusinessScreen> {
+  var _isInit = true;
+  var _isLoading = false;
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+      Provider.of<NewsProvider>(context)
+          .fetchAndSetNewsItems('business')
+          .then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    }
+    _isInit = false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.01),
-      child: ListView.builder(
-        itemCount: 16,
-        itemBuilder: (context, index) {
-          return NewsItem(
-            imageUrl:
-                'https://static.worldpoliticsreview.com/articles/28135/a_us-china_trade_war-08192019-1.jpg',
-            newsHeadline:
-                'The Next Stage of the U.S.-China Trade War Will Be Much Worse',
-            publishDate: 'Aug. 20, 2019',
-            sourceName: 'World Politics Review',
+    double width = MediaQuery.of(context).size.width;
+
+    return _isLoading
+        ? LoadingState()
+        : NewsList(
+            width: width,
+            categoryName: 'business',
           );
-        },
-      ),
-    );
   }
 }
