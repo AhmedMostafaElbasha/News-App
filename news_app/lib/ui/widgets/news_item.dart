@@ -33,10 +33,12 @@ class NewsItem extends StatelessWidget {
               Container(
                 height: height,
                 width: width * 0.3,
-                child: Image.network(
-                  article.imageUrl,
-                  fit: BoxFit.cover,
-                ),
+                child: article.imageUrl != null
+                    ? Image.network(
+                        article.imageUrl,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset('images/no_image_available.png'),
               ),
               SizedBox(
                 width: width * 0.02,
@@ -44,7 +46,7 @@ class NewsItem extends StatelessWidget {
               Flexible(
                 fit: FlexFit.loose,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 5),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -94,6 +96,8 @@ class NewsItem extends StatelessWidget {
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
+                        softWrap: true,
+                        maxLines: 1,
                       ),
                       SizedBox(
                         height: height * 0.01,
@@ -104,6 +108,8 @@ class NewsItem extends StatelessWidget {
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
+                        softWrap: true,
+                        maxLines: 1,
                       ),
                     ],
                   ),

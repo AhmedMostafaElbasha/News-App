@@ -27,15 +27,19 @@ class ArticleDetailsScreen extends StatelessWidget {
             children: <Widget>[
               Container(
                 height: height * 0.4,
-                child: Image.network(
-                  article.imageUrl,
-                  fit: BoxFit.cover,
+                child: Center(
+                  child: article.imageUrl != null
+                      ? Image.network(
+                          article.imageUrl,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset('images/no_image_available.png'),
                 ),
               ),
               Container(
                 margin: EdgeInsets.symmetric(
                   vertical: height * 0.02,
-                  horizontal: width * 0.01,
+                  horizontal: width * 0.02,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -83,11 +87,12 @@ class ArticleDetailsScreen extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                     SizedBox(
-                      height: height * 0.01,
+                      height: 2,
                     ),
                     Divider(
                       height: 20,
                       color: Colors.blueGrey,
+                      thickness: 0.75,
                     ),
                     SizedBox(
                       height: height * 0.01,
@@ -95,7 +100,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                     Text(
                       article.description,
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 16,
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -103,19 +108,19 @@ class ArticleDetailsScreen extends StatelessWidget {
                         ? Container()
                         : Container(
                             margin: EdgeInsets.symmetric(
-                              vertical: height * 0.02,
-                              horizontal: width * 0.01,
+                              vertical: 2,
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Divider(
-                                  height: 40,
+                                  height: 20,
                                   color: Colors.blueGrey,
+                                  thickness: 0.75,
                                 ),
                                 SizedBox(
-                                  height: height * 0.01,
+                                  height: 2,
                                 ),
                                 Text(
                                   'Details:',
@@ -131,7 +136,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                 Text(
                                   article.content,
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 16,
                                   ),
                                   textAlign: TextAlign.left,
                                 ),
