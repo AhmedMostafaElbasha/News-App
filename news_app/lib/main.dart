@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/data/news_provider.dart';
+import 'package:newsapp/ui/screens/article_details_screen.dart';
 import 'package:provider/provider.dart';
 
 import './ui/screens/home_screen.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
             ScienceScreen.routeName: (context) => ScienceScreen(),
             SportsScreen.routeName: (context) => SportsScreen(),
             TechnologyScreen.routeName: (context) => TechnologyScreen(),
+            ArticleDetailsScreen.routeName: (context) => ArticleDetailsScreen(),
           },
         ),
       ),

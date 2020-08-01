@@ -42,7 +42,7 @@ class _BusinessScreenState extends State<BusinessScreen> {
         ? LoadingState()
         : NewsList(
             width: width,
-            categoryName: 'business',
+            categoryName: '',
           );
   }
 }

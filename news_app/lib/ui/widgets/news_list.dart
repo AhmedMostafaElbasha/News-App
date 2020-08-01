@@ -21,7 +21,7 @@ class NewsList extends StatelessWidget {
         .then((value) => (_) {});
 
     var newsData = Provider.of<NewsProvider>(context);
-    var newsItems = newsData.newsItems;
+    var newsItems = newsData.articles;
 
     return newsItems.length == 0
         ? EmptyState()
@@ -31,7 +31,7 @@ class NewsList extends StatelessWidget {
               itemCount: newsItems.length,
               itemBuilder: (context, index) {
                 return NewsItem(
-                  news: newsItems[index],
+                  article: newsItems[index],
                 );
               },
             ),

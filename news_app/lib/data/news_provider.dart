@@ -2,48 +2,36 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import './news.dart';
+import 'article.dart';
 import '../constants.dart';
+import 'dart:convert';
 
 class NewsProvider with ChangeNotifier {
-  List<News> _newsItems = [];
+  List<Article> _articles = [];
 
-  List<News> get newsItems => [..._newsItems];
+  List<Article> get articles => [..._articles];
 
   Future<void> fetchAndSetNewsItems(String category) async {
-    final url =
-        'https://newsapi.org/v2/top-headlines?category=$category&apiKey=$kApiKey';
+    final response = await http.get(
+        'https://newsapi.org/v2/top-headlines?category=$category&apiKey=$kApiKey');
 
-    try {
-      final response = await http.get(url);
-      final extractedData = response.body as List<Map<String, dynamic>>;
-      final List<News> loadedNews = [];
+    if (response.statusCode == 200) {
+      final responseBody = json.decode(response.body);
+      final extractedArticles = responseBody['articles'];
+      final List<Article> loadedArticles = [];
 
-      if (extractedData == null) {
-        return;
+      if (extractedArticles == null) {
+        throw Exception('there are no articles to load.');
       }
 
-      extractedData.forEach((newsData) {
-        loadedNews.add(News(
-          sourceId: newsData['source']['id'] == null
-              ? 'Unknown'
-              : newsData['source']['id'],
-          sourceName: newsData['source']['name'],
-          author: newsData['author'] == null ? 'Unknown' : newsData['author'],
-          title: newsData['title'],
-          description: newsData['description'],
-          newsUrl: newsData['url'],
-          imageUrl: newsData['urlToImage'],
-          content: newsData['content'] == null ? '' : newsData['content'],
-          publishDate: DateFormat('dd/MM/yyyy  hh:mm', newsData['publishedAt'])
-              as String,
-        ));
-
-        _newsItems = loadedNews;
-        notifyListeners();
+      extractedArticles.forEach((article) {
+        loadedArticles.add(Article.fromJson(article));
       });
-    } catch (error) {
-      return error;
+
+      _articles = loadedArticles;
+    } else {
+      throw Exception('Failed to retrieve articles. Please try again later.');
     }
+    notifyListeners();
   }
 }

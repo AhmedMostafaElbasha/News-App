@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:newsapp/data/news.dart';
+import 'package:newsapp/data/article.dart';
+import 'package:newsapp/ui/screens/article_details_screen.dart';
 
 class NewsItem extends StatelessWidget {
-  final News news;
+  final Article article;
 
   NewsItem({
-    @required this.news,
+    @required this.article,
   });
 
   @override
@@ -14,10 +15,13 @@ class NewsItem extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context)
+            .pushNamed(ArticleDetailsScreen.routeName, arguments: article);
+      },
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
-        height: height * 0.20,
+        height: height * 0.21,
         margin: EdgeInsets.only(
           top: height * 0.01,
           bottom: height * 0.01,
@@ -30,7 +34,7 @@ class NewsItem extends StatelessWidget {
                 height: height,
                 width: width * 0.3,
                 child: Image.network(
-                  news.imageUrl,
+                  article.imageUrl,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -39,17 +43,18 @@ class NewsItem extends StatelessWidget {
               ),
               Flexible(
                 fit: FlexFit.loose,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(
-                      height: height * 0.01,
-                    ),
-                    Flexible(
-                      child: Row(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      Row(
                         children: <Widget>[
                           Text(
-                            news.publishDate,
+                            article.publishDate,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.blueGrey,
@@ -57,13 +62,11 @@ class NewsItem extends StatelessWidget {
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      height: height * 0.01,
-                    ),
-                    Flexible(
-                      child: Text(
-                        news.title,
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      Text(
+                        article.title,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -71,43 +74,39 @@ class NewsItem extends StatelessWidget {
                         softWrap: true,
                         maxLines: 1,
                       ),
-                    ),
-                    SizedBox(
-                      height: height * 0.01,
-                    ),
-                    Flexible(
-                      child: Text(
-                        news.description,
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      Text(
+                        article.description,
                         style: TextStyle(
                           fontSize: 14,
                         ),
+                        softWrap: true,
+                        maxLines: 1,
                       ),
-                    ),
-                    SizedBox(
-                      height: height * 0.01,
-                    ),
-                    Flexible(
-                      child: Text(
-                        news.author,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      SizedBox(
+                        height: height * 0.02,
                       ),
-                    ),
-                    SizedBox(
-                      height: height * 0.1,
-                    ),
-                    Flexible(
-                      child: Text(
-                        news.sourceName,
+                      Text(
+                        article.author,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      Text(
+                        article.sourceName,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
