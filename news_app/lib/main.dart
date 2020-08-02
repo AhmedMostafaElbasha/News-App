@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<NewsProvider>(
         builder: (context, newsData, _) => MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
             primaryColor: Colors.white,

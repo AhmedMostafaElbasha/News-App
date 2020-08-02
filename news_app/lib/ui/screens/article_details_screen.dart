@@ -27,13 +27,17 @@ class ArticleDetailsScreen extends StatelessWidget {
             children: <Widget>[
               Container(
                 height: height * 0.4,
-                child: Center(
+                child: Hero(
+                  tag: article,
                   child: article.imageUrl != null
                       ? Image.network(
                           article.imageUrl,
                           fit: BoxFit.cover,
                         )
-                      : Image.asset('images/no_image_available.png'),
+                      : Image.asset(
+                          'images/no-image.png',
+                          fit: BoxFit.contain,
+                        ),
                 ),
               ),
               Container(

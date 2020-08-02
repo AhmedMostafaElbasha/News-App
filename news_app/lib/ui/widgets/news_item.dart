@@ -33,12 +33,18 @@ class NewsItem extends StatelessWidget {
               Container(
                 height: height,
                 width: width * 0.3,
-                child: article.imageUrl != null
-                    ? Image.network(
-                        article.imageUrl,
-                        fit: BoxFit.cover,
-                      )
-                    : Image.asset('images/no_image_available.png'),
+                child: Hero(
+                  tag: article,
+                  child: article.imageUrl != null
+                      ? Image.network(
+                          article.imageUrl,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset(
+                          'images/no-image.png',
+                          fit: BoxFit.cover,
+                        ),
+                ),
               ),
               SizedBox(
                 width: width * 0.02,
