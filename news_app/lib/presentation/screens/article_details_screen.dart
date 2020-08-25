@@ -1,8 +1,11 @@
+// Package Imports
 import 'package:flutter/material.dart';
-import 'package:newsapp/data/article.dart';
+
+// Inner Imports
+import '../../models/models.dart';
+import '../../constants/constants.dart';
 
 class ArticleDetailsScreen extends StatelessWidget {
-  static const routeName = '/article_details_screen';
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -35,7 +38,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                           fit: BoxFit.cover,
                         )
                       : Image.asset(
-                          'images/no-image.png',
+                          kNoImage,
                           fit: BoxFit.contain,
                         ),
                 ),

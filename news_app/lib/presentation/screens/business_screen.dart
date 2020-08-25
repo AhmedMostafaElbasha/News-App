@@ -1,17 +1,19 @@
+// Package Imports
 import 'package:flutter/material.dart';
-import 'package:newsapp/data/news_provider.dart';
-import 'package:newsapp/ui/widgets/loading_state.dart';
-import 'package:newsapp/ui/widgets/news_list.dart';
+import 'package:newsapp/constants/category_names.dart';
 import 'package:provider/provider.dart';
 
-class EntertainmentScreen extends StatefulWidget {
-  static String routeName = '/entertainment_screen';
+// Inner Imports
+import '../presentation.dart';
+import '../../models/models.dart';
+import '../../constants/constants.dart';
 
+class BusinessScreen extends StatefulWidget {
   @override
-  _EntertainmentScreenState createState() => _EntertainmentScreenState();
+  _BusinessScreenState createState() => _BusinessScreenState();
 }
 
-class _EntertainmentScreenState extends State<EntertainmentScreen> {
+class _BusinessScreenState extends State<BusinessScreen> {
   var _isInit = true;
   var _isLoading = false;
 
@@ -24,7 +26,7 @@ class _EntertainmentScreenState extends State<EntertainmentScreen> {
         _isLoading = true;
       });
       Provider.of<NewsProvider>(context)
-          .fetchAndSetNewsItems('entertainment')
+          .fetchAndSetNewsItems(kBusinessCategory)
           .then((_) {
         setState(() {
           _isLoading = false;
@@ -42,7 +44,7 @@ class _EntertainmentScreenState extends State<EntertainmentScreen> {
         ? LoadingState()
         : NewsList(
             width: width,
-            categoryName: 'entertainment',
+            categoryName: kBusinessCategory,
           );
   }
 }

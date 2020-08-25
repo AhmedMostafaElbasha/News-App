@@ -1,17 +1,11 @@
+// Package Imports
 import 'package:flutter/material.dart';
-import 'package:newsapp/ui/screens/business_screen.dart';
-import 'package:newsapp/ui/screens/entertainment_screen.dart';
-import 'package:newsapp/ui/screens/general_screen.dart';
-import 'package:newsapp/ui/screens/health_screen.dart';
-import 'package:newsapp/ui/screens/science_screen.dart';
-import 'package:newsapp/ui/screens/sports_screen.dart';
-import 'package:newsapp/ui/screens/technology_screen.dart';
 
-import '../widgets/custom_drawer.dart';
+// Inner Imports
+import '../presentation.dart';
+import '../../constants/constants.dart';
 
 class HomeScreen extends StatefulWidget {
-  static String routeName = '/home_screen';
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -40,25 +34,25 @@ class _HomeScreenState extends State<HomeScreen>
             controller: tabCotroller,
             tabs: [
               Tab(
-                text: 'Business',
+                text: kBusinessTab,
               ),
               Tab(
-                text: 'Entertainment',
+                text: kEntertainmentTab,
               ),
               Tab(
-                text: 'General',
+                text: kGeneralTab,
               ),
               Tab(
-                text: 'Health',
+                text: kHealthTab,
               ),
               Tab(
-                text: 'Science',
+                text: kScienceTab,
               ),
               Tab(
-                text: 'Sports',
+                text: kSportsTab,
               ),
               Tab(
-                text: 'Technology',
+                text: kTechnologyTab,
               ),
             ],
             isScrollable: true,

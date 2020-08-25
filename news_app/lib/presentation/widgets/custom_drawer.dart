@@ -1,12 +1,8 @@
+// Package Imports
 import 'package:flutter/material.dart';
 
-import '../screens/business_screen.dart';
-import '../screens/entertainment_screen.dart';
-import '../screens/general_screen.dart';
-import '../screens/health_screen.dart';
-import '../screens/science_screen.dart';
-import '../screens/sports_screen.dart';
-import '../screens/technology_screen.dart';
+// Inner Imports
+import '../../constants/constants.dart';
 
 class CustomDrawer extends StatelessWidget {
   TabController tabCotroller;
@@ -32,49 +28,49 @@ class CustomDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: Text('Business'),
+            title: Text(kBusinessTab),
             onTap: () {
               Navigator.pop(context);
               tabCotroller.animateTo(0);
             },
           ),
           ListTile(
-            title: Text('Entertainment'),
+            title: Text(kEntertainmentTab),
             onTap: () {
               Navigator.pop(context);
               tabCotroller.animateTo(1);
             },
           ),
           ListTile(
-            title: Text('General'),
+            title: Text(kGeneralTab),
             onTap: () {
               Navigator.of(context).pop();
               tabCotroller.animateTo(2);
             },
           ),
           ListTile(
-            title: Text('Health'),
+            title: Text(kHealthTab),
             onTap: () {
               Navigator.pop(context);
               tabCotroller.animateTo(3);
             },
           ),
           ListTile(
-            title: Text('Science'),
+            title: Text(kScienceTab),
             onTap: () {
               Navigator.of(context).pop();
               tabCotroller.animateTo(4);
             },
           ),
           ListTile(
-            title: Text('Sports'),
+            title: Text(kSportsTab),
             onTap: () {
               Navigator.pop(context);
               tabCotroller.animateTo(5);
             },
           ),
           ListTile(
-            title: Text('Technology'),
+            title: Text(kTechnologyTab),
             onTap: () {
               Navigator.pop(context);
               tabCotroller.animateTo(6);

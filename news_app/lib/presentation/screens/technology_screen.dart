@@ -1,12 +1,14 @@
+// Package Imports
 import 'package:flutter/material.dart';
-import 'package:newsapp/data/news_provider.dart';
-import 'package:newsapp/ui/widgets/loading_state.dart';
-import 'package:newsapp/ui/widgets/news_list.dart';
+import 'package:newsapp/constants/category_names.dart';
 import 'package:provider/provider.dart';
 
-class TechnologyScreen extends StatefulWidget {
-  static String routeName = '/technology_screen';
+// Inner Imports
+import '../presentation.dart';
+import '../../models/models.dart';
+import '../../constants/constants.dart';
 
+class TechnologyScreen extends StatefulWidget {
   @override
   _TechnologyScreenState createState() => _TechnologyScreenState();
 }
@@ -24,7 +26,7 @@ class _TechnologyScreenState extends State<TechnologyScreen> {
         _isLoading = true;
       });
       Provider.of<NewsProvider>(context)
-          .fetchAndSetNewsItems('technology')
+          .fetchAndSetNewsItems(kTechnologyCategory)
           .then((_) {
         setState(() {
           _isLoading = false;
@@ -42,7 +44,7 @@ class _TechnologyScreenState extends State<TechnologyScreen> {
         ? LoadingState()
         : NewsList(
             width: width,
-            categoryName: 'technology',
+            categoryName: kTechnologyCategory,
           );
   }
 }

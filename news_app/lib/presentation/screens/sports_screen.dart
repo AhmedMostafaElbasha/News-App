@@ -1,12 +1,14 @@
+// Package Imports
 import 'package:flutter/material.dart';
-import 'package:newsapp/data/news_provider.dart';
-import 'package:newsapp/ui/widgets/loading_state.dart';
-import 'package:newsapp/ui/widgets/news_list.dart';
+import 'package:newsapp/constants/category_names.dart';
 import 'package:provider/provider.dart';
 
-class SportsScreen extends StatefulWidget {
-  static String routeName = '/sports_screen';
+// Inner Imports
+import '../presentation.dart';
+import '../../models/models.dart';
+import '../../constants/constants.dart';
 
+class SportsScreen extends StatefulWidget {
   @override
   _SportsScreenState createState() => _SportsScreenState();
 }
@@ -24,7 +26,7 @@ class _SportsScreenState extends State<SportsScreen> {
         _isLoading = true;
       });
       Provider.of<NewsProvider>(context)
-          .fetchAndSetNewsItems('sports')
+          .fetchAndSetNewsItems(kSportsCategory)
           .then((_) {
         setState(() {
           _isLoading = false;
@@ -42,7 +44,7 @@ class _SportsScreenState extends State<SportsScreen> {
         ? LoadingState()
         : NewsList(
             width: width,
-            categoryName: 'sports',
+            categoryName: kSportsCategory,
           );
   }
 }

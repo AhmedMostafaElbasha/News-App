@@ -1,7 +1,11 @@
+// Package Imports
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:newsapp/data/article.dart';
-import 'package:newsapp/ui/screens/article_details_screen.dart';
+
+// Inner Imports
+import '../presentation.dart';
+import '../../models/models.dart';
+import '../../constants/constants.dart';
 
 class NewsItem extends StatelessWidget {
   final Article article;
@@ -17,7 +21,7 @@ class NewsItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context)
-            .pushNamed(ArticleDetailsScreen.routeName, arguments: article);
+            .pushNamed(kArticleDetailsScreen, arguments: article);
       },
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
@@ -41,7 +45,7 @@ class NewsItem extends StatelessWidget {
                           fit: BoxFit.cover,
                         )
                       : Image.asset(
-                          'images/no-image.png',
+                          kNoImage,
                           fit: BoxFit.cover,
                         ),
                 ),

@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-
-import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
-import 'article.dart';
-import '../constants.dart';
+// Dart Imports
 import 'dart:convert';
+
+// Package Imports
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+// Inner Imports
+import 'article.dart';
+import '../constants/constants.dart';
 
 class NewsProvider with ChangeNotifier {
   List<Article> _articles = [];

@@ -1,12 +1,14 @@
+// Package Imports
 import 'package:flutter/material.dart';
-import 'package:newsapp/data/news_provider.dart';
-import 'package:newsapp/ui/widgets/loading_state.dart';
-import 'package:newsapp/ui/widgets/news_list.dart';
+import 'package:newsapp/constants/category_names.dart';
 import 'package:provider/provider.dart';
 
-class GeneralScreen extends StatefulWidget {
-  static String routeName = '/general_screen';
+// Inner Imports
+import '../presentation.dart';
+import '../../models/models.dart';
+import '../../constants/constants.dart';
 
+class GeneralScreen extends StatefulWidget {
   @override
   _GeneralScreenState createState() => _GeneralScreenState();
 }
@@ -24,7 +26,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
         _isLoading = true;
       });
       Provider.of<NewsProvider>(context)
-          .fetchAndSetNewsItems('general')
+          .fetchAndSetNewsItems(kGeneralCategory)
           .then((_) {
         setState(() {
           _isLoading = false;
@@ -42,7 +44,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
         ? LoadingState()
         : NewsList(
             width: width,
-            categoryName: 'general',
+            categoryName: kGeneralCategory,
           );
   }
 }

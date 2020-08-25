@@ -1,17 +1,18 @@
+// Package Imports
 import 'package:flutter/material.dart';
-import 'package:newsapp/data/news_provider.dart';
-import 'package:newsapp/ui/widgets/loading_state.dart';
-import 'package:newsapp/ui/widgets/news_list.dart';
 import 'package:provider/provider.dart';
 
-class BusinessScreen extends StatefulWidget {
-  static String routeName = '/business_screen';
+// Inner Imports
+import '../presentation.dart';
+import '../../models/models.dart';
+import '../../constants/constants.dart';
 
+class ScienceScreen extends StatefulWidget {
   @override
-  _BusinessScreenState createState() => _BusinessScreenState();
+  _ScienceScreenState createState() => _ScienceScreenState();
 }
 
-class _BusinessScreenState extends State<BusinessScreen> {
+class _ScienceScreenState extends State<ScienceScreen> {
   var _isInit = true;
   var _isLoading = false;
 
@@ -24,7 +25,7 @@ class _BusinessScreenState extends State<BusinessScreen> {
         _isLoading = true;
       });
       Provider.of<NewsProvider>(context)
-          .fetchAndSetNewsItems('business')
+          .fetchAndSetNewsItems(kScienceCategory)
           .then((_) {
         setState(() {
           _isLoading = false;
@@ -42,7 +43,7 @@ class _BusinessScreenState extends State<BusinessScreen> {
         ? LoadingState()
         : NewsList(
             width: width,
-            categoryName: '',
+            categoryName: kScienceCategory,
           );
   }
 }

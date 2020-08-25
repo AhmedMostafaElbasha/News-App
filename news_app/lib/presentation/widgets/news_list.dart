@@ -1,9 +1,10 @@
+// Package Imports
 import 'package:flutter/material.dart';
-import 'package:newsapp/data/news_provider.dart';
-import 'package:newsapp/ui/widgets/empty_state.dart';
 import 'package:provider/provider.dart';
 
-import './news_item.dart';
+// Inner Imports
+import '../presentation.dart';
+import '../../models/models.dart';
 
 class NewsList extends StatelessWidget {
   final double width;
