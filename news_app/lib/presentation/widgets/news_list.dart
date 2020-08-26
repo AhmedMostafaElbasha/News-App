@@ -8,34 +8,30 @@ import '../../models/models.dart';
 
 class NewsList extends StatelessWidget {
   final double width;
-  final String categoryName;
+  // final String categoryName;
+  final List<Article> articles;
 
-  NewsList({
-    @required this.width,
-    @required this.categoryName,
-  });
+  NewsList({@required this.width, @required this.articles});
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<NewsProvider>(context)
-        .fetchAndSetNewsItems(categoryName)
-        .then((value) => (_) {});
+    // Provider.of<NewsProvider>(context)
+    //     .fetchAndSetNewsItems(categoryName)
+    //     .then((value) => (_) {});
 
-    var newsData = Provider.of<NewsProvider>(context);
-    var newsItems = newsData.articles;
+    // var newsData = Provider.of<NewsProvider>(context);
+    // var newsItems = newsData.articles;
 
-    return newsItems.length == 0
-        ? EmptyState()
-        : Container(
-            margin: EdgeInsets.all(width * 0.01),
-            child: ListView.builder(
-              itemCount: newsItems.length,
-              itemBuilder: (context, index) {
-                return NewsItem(
-                  article: newsItems[index],
-                );
-              },
-            ),
+    return Container(
+      margin: EdgeInsets.all(width * 0.01),
+      child: ListView.builder(
+        itemCount: articles.length,
+        itemBuilder: (context, index) {
+          return NewsItem(
+            article: articles[index],
           );
+        },
+      ),
+    );
   }
 }

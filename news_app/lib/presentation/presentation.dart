@@ -15,3 +15,4 @@ export './widgets/empty_state.dart';
 export './widgets/loading_state.dart';
 export './widgets/news_item.dart';
 export './widgets/news_list.dart';
+export './widgets/error_state.dart';
