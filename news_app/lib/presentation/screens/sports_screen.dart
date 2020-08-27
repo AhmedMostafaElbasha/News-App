@@ -14,13 +14,23 @@ class SportsScreen extends StatefulWidget {
 
 class _SportsScreenState extends State<SportsScreen> {
   ArticleBloc _articleBloc;
+  var _isInitialized = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _articleBloc = BlocProvider.of<ArticleBloc>(context);
-    _articleBloc.category = kSportsCategory;
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    if (!_isInitialized) {
+      _articleBloc = BlocProvider.of<ArticleBloc>(context)
+        ..setCategory(kSportsCategory);
+    }
+    _isInitialized = true;
   }
 
   @override

@@ -15,9 +15,13 @@ import '../../../constants/constants.dart';
 
 class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
   final http.Client httpClient;
-  String category;
+  String _category;
 
   ArticleBloc({@required this.httpClient}) : super(ArticleInitial());
+
+  void setCategory(String category) {
+    _category = category;
+  }
 
   @override
   Stream<ArticleState> mapEventToState(ArticleEvent event) async* {
@@ -26,15 +30,15 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
     if (event is ArticleFetched) {
       try {
         if (currentState is ArticleInitial) {
-          final articles = await fetchAndSetArticles(category);
+          final articles = await fetchAndSetArticles(_category);
           yield ArticleSuccess(articles: articles);
           return;
         }
         if (currentState is ArticleSuccess) {
-          final articles = await fetchAndSetArticles(category);
+          final articles = await fetchAndSetArticles(_category);
           yield articles.isEmpty
               ? currentState.copyWith()
-              : ArticleSuccess(articles: currentState.articles + articles);
+              : ArticleSuccess(articles: articles);
         }
       } catch (e) {
         yield ArticleFailure();

@@ -14,13 +14,23 @@ class ScienceScreen extends StatefulWidget {
 
 class _ScienceScreenState extends State<ScienceScreen> {
   ArticleBloc _articleBloc;
+  var _isInitialized = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _articleBloc = BlocProvider.of<ArticleBloc>(context);
-    _articleBloc.category = kScienceCategory;
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    if (!_isInitialized) {
+      _articleBloc = BlocProvider.of<ArticleBloc>(context)
+        ..setCategory(kScienceCategory);
+    }
+    _isInitialized = true;
   }
 
   @override

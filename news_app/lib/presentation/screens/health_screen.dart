@@ -14,13 +14,23 @@ class HealthScreen extends StatefulWidget {
 
 class _HealthScreenState extends State<HealthScreen> {
   ArticleBloc _articleBloc;
+  var _isInitialized = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _articleBloc = BlocProvider.of<ArticleBloc>(context);
-    _articleBloc.category = kHealthCategory;
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    if (!_isInitialized) {
+      _articleBloc = BlocProvider.of<ArticleBloc>(context)
+        ..setCategory(kHealthCategory);
+    }
+    _isInitialized = true;
   }
 
   @override
