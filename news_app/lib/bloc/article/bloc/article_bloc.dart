@@ -5,6 +5,7 @@ import 'dart:async';
 // Package Imports
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:newsapp/bloc/article/events/article_reload.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,13 +24,17 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
     _category = category;
   }
 
+  Future<void> reloadArticles(ArticleEvent event) async {
+    await mapEventToState(event);
+  }
+
   @override
   Stream<ArticleState> mapEventToState(ArticleEvent event) async* {
     final currentState = state;
 
     if (event is ArticleFetched) {
       try {
-        if (currentState is ArticleInitial) {
+        if (currentState is ArticleInitial || currentState is ArticleReload) {
           final articles = await fetchAndSetArticles(_category);
           yield ArticleSuccess(articles: articles);
           return;

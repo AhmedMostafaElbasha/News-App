@@ -10,6 +10,18 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<ListTile> listTiles = kTabNames
+        .map(
+          (tabName) => ListTile(
+            title: Text(tabName),
+            onTap: () {
+              Navigator.pop(context);
+              tabCotroller.animateTo(kTabNames.indexOf(tabName));
+            },
+          ),
+        )
+        .toList();
+
     return Drawer(
       child: ListView(
         children: <Widget>[
@@ -27,55 +39,7 @@ class CustomDrawer extends StatelessWidget {
               color: Colors.blueGrey,
             ),
           ),
-          ListTile(
-            title: Text(kBusinessTab),
-            onTap: () {
-              Navigator.pop(context);
-              tabCotroller.animateTo(0);
-            },
-          ),
-          ListTile(
-            title: Text(kEntertainmentTab),
-            onTap: () {
-              Navigator.pop(context);
-              tabCotroller.animateTo(1);
-            },
-          ),
-          ListTile(
-            title: Text(kGeneralTab),
-            onTap: () {
-              Navigator.of(context).pop();
-              tabCotroller.animateTo(2);
-            },
-          ),
-          ListTile(
-            title: Text(kHealthTab),
-            onTap: () {
-              Navigator.pop(context);
-              tabCotroller.animateTo(3);
-            },
-          ),
-          ListTile(
-            title: Text(kScienceTab),
-            onTap: () {
-              Navigator.of(context).pop();
-              tabCotroller.animateTo(4);
-            },
-          ),
-          ListTile(
-            title: Text(kSportsTab),
-            onTap: () {
-              Navigator.pop(context);
-              tabCotroller.animateTo(5);
-            },
-          ),
-          ListTile(
-            title: Text(kTechnologyTab),
-            onTap: () {
-              Navigator.pop(context);
-              tabCotroller.animateTo(6);
-            },
-          ),
+          ...listTiles,
         ],
       ),
     );
