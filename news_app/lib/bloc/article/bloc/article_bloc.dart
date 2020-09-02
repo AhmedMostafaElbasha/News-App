@@ -32,7 +32,7 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
   Stream<ArticleState> mapEventToState(ArticleEvent event) async* {
     final currentState = state;
 
-    if (event is ArticleFetched) {
+    if (event is ArticleFetched || event is ArticleReload) {
       try {
         if (currentState is ArticleInitial || currentState is ArticleReload) {
           final articles = await fetchAndSetArticles(_category);
@@ -42,7 +42,7 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
         if (currentState is ArticleSuccess) {
           final articles = await fetchAndSetArticles(_category);
           yield articles.isEmpty
-              ? currentState.copyWith()
+              ? ArticleSuccess(articles: articles)
               : ArticleSuccess(articles: articles);
         }
       } catch (e) {

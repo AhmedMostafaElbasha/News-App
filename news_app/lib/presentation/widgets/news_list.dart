@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsapp/bloc/article/events/article_reload.dart';
+import 'package:http/http.dart' as http;
 
 // Inner Imports
 import '../presentation.dart';
@@ -17,9 +18,12 @@ class NewsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ArticleBloc articleBloc = BlocProvider.of<ArticleBloc>(context)..setCategory(categoryName);
+    var articleBloc = ArticleBloc(httpClient: http.Client())..add(ArticleFetched())..setCategory(categoryName);
 
-    return _buildList(articleBloc);
+    return BlocProvider(
+      create: (context) => articleBloc,
+      child: _buildList(articleBloc),
+    );
   }
 
   Widget _buildList(ArticleBloc articleBloc) {
@@ -35,19 +39,19 @@ class NewsList extends StatelessWidget {
           return state.articles.isEmpty
               ? EmptyState()
               : RefreshIndicator(
-            onRefresh: () => articleBloc.reloadArticles(articleReload),
-                child: Container(
-            margin: EdgeInsets.all(width * 0.01),
-            child: ListView.builder(
-                itemCount: state.articles.length,
-                itemBuilder: (context, index) {
-                  return NewsItem(
-                    article: state.articles[index],
-                  );
-                },
-            ),
-          ),
-              );
+                  onRefresh: () => articleBloc.reloadArticles(articleReload),
+                  child: Container(
+                    margin: EdgeInsets.all(width * 0.01),
+                    child: ListView.builder(
+                      itemCount: state.articles.length,
+                      itemBuilder: (context, index) {
+                        return NewsItem(
+                          article: state.articles[index],
+                        );
+                      },
+                    ),
+                  ),
+                );
         }
         return Container();
       },
